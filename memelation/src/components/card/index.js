@@ -1,8 +1,7 @@
 import React from 'react'
 import {MomWrapper, Caard, ImageCard, TextCard, Span, H2, CardStats, Stat, Value, Type, CardStatBorder, Sup } from './styled'
 import {Link} from 'react-router-dom'
-import api from '../../services/memelation'
-const memelation = new api()
+
 
 
 export default function Card({imagem,categoria,autor,hashtags,alt}){
@@ -19,7 +18,7 @@ export default function Card({imagem,categoria,autor,hashtags,alt}){
         <MomWrapper>
             <Caard>
                 <ImageCard>
-                    <img src={memelation.getPhoto(imagem)} alt='not Found' heigth='120'/>
+                    <img src={imagem} alt='' heigth='40'/>
                 </ImageCard> 
                 <TextCard>
                     <Span>{categoria}</Span>

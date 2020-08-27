@@ -12,12 +12,12 @@ export default function Routes(){
     return (
         <BrowserRouter>
             <Switch>
-                <Route path='/' exact={true} componenets={home}/>
-                <Route path='/notFound' componenets={notfound}/>
-                <Route path='/adulMeme' componenets={adultMeme}/>
-                <Route path='/register' componenets={register}/>
-                <Route path='/change' componenets={change}/>
-                <Route path='/delete' componenets={remove}/>
+                <Route path='/' exact={true} component={home}/>
+                <Route path='/Meme' component={adultMeme}/>
+                <Route path='/register' component={register}/>
+                <Route path='/change' component={change}/>
+                <Route path='/delete' component={remove}/>
+                <Route path='*' component={notfound}/>
             </Switch>
         </BrowserRouter>
     )

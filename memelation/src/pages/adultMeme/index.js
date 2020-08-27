@@ -1,9 +1,11 @@
 import React,{ useState, useEffect } from 'react'
 import Carousel from 'react-multi-carousel'
+import { useHistory } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import memelation from '../../services/memelation'
-import Card from '../../components/card'
 import "react-multi-carousel/lib/styles.css"
+import Card from '../../components/card'
 const api = new memelation()
 
 export default function AdultMeme(){
@@ -26,7 +28,7 @@ export default function AdultMeme(){
           items: 1
         }
       }
-
+    const his = useHistory()  
     const adultMemeClick = async () => {
         try{
             const con = await api.consult()
@@ -48,11 +50,16 @@ export default function AdultMeme(){
             <h1>Memes adultos</h1>
             <Carousel responsive={responsive}>
                 {req.filter(x => x.maior).map(x =>                 
-                    <div>
-                        <img src={api.getPhoto(x.imagem)} alt=""/>
-                    </div> 
+                    <Card imagem={api.getPhoto(x.imagem)}
+                    categoria={x.categoria}
+                    autor={x.autor}
+                    hashtags={x.hashtags}
+                    alt={x}/>
                 )}
             </Carousel>
+            <button onClick={() => his.goBack()}>
+                Voltar ao menu
+            </button>
         </div>
     )
 }
