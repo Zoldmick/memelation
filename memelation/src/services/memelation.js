@@ -6,11 +6,12 @@ const memelation = axios.create({
 
 export default class api{
     async consult(){
-        const resp = await memelation.get(`/memelation`)
+        const resp = await memelation.get("/Memelation")
+        console.log(resp)
         return resp.data
     }
     async delete(id){
-        const resp = await memelation.delete(`/memelation/${id}`)
+        const resp = await memelation.delete(`/Memelation/${id}`)
         return resp.data
     }
     async register(mm){
@@ -21,16 +22,19 @@ export default class api{
         form.append('hashtags',mm.hashtags)
         form.append('imagem',mm.imagem)
 
-        const resp = await memelation.post(`/memelation`,form,{
+        const resp = await memelation.post(`/Memelation`,form,{
             headers: {'content-type':'multipart/form-data'}
         })
         return resp.data
     }
     async change(id,mm){
-        const resp = await memelation.put(`/memelation/${id}`,mm)
+        const resp = await memelation.put(`/Memelation/${id}`,mm)
         return resp.data
     }
-    getPhoto(nome){
-        return memelation.defaults.baseURL + `/memelation/foto` + nome
-    }
+    getPhoto(foto) {
+        const urlFoto = memelation.defaults.baseURL + "/Memelation/foto/" + foto
+        console.log(urlFoto)
+    
+        return urlFoto
+      }
 }

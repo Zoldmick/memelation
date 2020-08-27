@@ -3,8 +3,9 @@ import Carousel from 'react-multi-carousel'
 import { ToastContainer, toast } from 'react-toastify'
 import memelation from '../../services/memelation'
 import Card from '../../components/card'
-import "react-multi-carousel/lib/styles.css"
 import { Link } from 'react-router-dom'
+import Validate from '../../components/validateAge'
+import "react-multi-carousel/lib/styles.css"
 const api = new memelation()
 
 export default function HomePage(){
@@ -28,14 +29,14 @@ export default function HomePage(){
         }
       }
 
-    const consultClick = () => {
+    const consultClick = async () => {
         try{
-            const con = api.consult()
+            const con = await api.consult()
             setReq([...con])
+
         }
         catch(e){
-            if(e.response.data.erro) toast.error(e.response.data.erro)
-            else toast.error("Algo deu errado. Tente de novo mais tarde.")
+            toast.error(e.response.data.erro)
         }
     }
 
@@ -46,17 +47,15 @@ export default function HomePage(){
     return(
         <div>
             <ToastContainer />
-            <h1>Oi</h1>
+            <h1>Consultar</h1>
             <Carousel responsive={responsive}>
-                {req.filter(x => !x.maior).map(x => 
-                    <Card imagem={x.imagem}
-                    categoria={x.categoria}
-                    hashtags={x.hashtags}
-                    autor={x.autor}
-                    alt={x}/>
+                {req.filter(x => !x.maior).map(x =>                 
+                    <div>
+                        <img src={api.getPhoto(x.imagem)} alt=""/>
+                    </div> 
                 )}
             </Carousel>
-            <Link to='/'>Voltar a pagina inicial</Link>
+            <Link to='/adultMeme' onClick={() => Validate}>Pagina de memes adultos</Link>
         </div>
     )
 }

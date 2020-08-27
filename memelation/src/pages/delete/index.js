@@ -6,14 +6,13 @@ const api = new memelation()
 
 export default function Delete(props){
     const his = useHistory()
-    const deleteClick = () => {
+    const deleteClick = async () => {
         try{
-            api.delete(props.location.state.id)
+            await api.delete(props.location.state.id)
             his.goBack()
         }
         catch(e){
-            if(e.response.data.erro) toast.error(e.response.data.erro)
-            else toast.error('Algo deu errado. Tente novamente')
+            toast.error(e.response.data.erro)
         }
     }
     const deleteFakeClick = () => his.goBack()
